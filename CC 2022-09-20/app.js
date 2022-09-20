@@ -1,14 +1,28 @@
-// The other day I saw an amazing video where a guy hacked some wifi controlled lightbulbs by flying a drone past them. Brilliant.
+// You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
 
-// In this kata we will recreate that stunt... sort of.
+// Implement the function which takes an array containing the names of people that like an item. It must return the display text as shown in the examples:
 
-// You will be given two strings: lamps and drone. lamps represents a row of lamps, currently off, each represented by x. When these lamps are on, they should be represented by o.
+// []                                -->  "no one likes this"
+// ["Peter"]                         -->  "Peter likes this"
+// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
+// ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
+// ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
+// Note: For 4 or more names, the number in "and 2 others" simply increases.
 
-// The drone string represents the position of the drone T (any better suggestion for character??) and its flight path up until this point =. The drone always flies left to right, and always begins at the start of the row of lamps. Anywhere the drone has flown, including its current position, will result in the lamp at that position switching on.
-
-// Return the resulting lamps string. See example tests for more clarity.
-
-
-function flyBy(lamps, drone){ 
-    return lamps.split('').map((a, b) => b <= drone.split('').length - 1 ? a = 'o' : a = a).join('')
+function likes(names) {
+    if (names[0] === undefined || names[0] === null){
+      return 'no one likes this'
+    }
+    if (names.length === 1){
+      return `${names} likes this`
+    }
+    else if (names.length === 2){
+      return `${names[0]} and ${names[1]} like this`
+    }
+    else if (names.length === 3){
+      return `${names[0]}, ${names[1]} and ${names[2]} like this`
+    }
+    else {
+      return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
+    }
   }
